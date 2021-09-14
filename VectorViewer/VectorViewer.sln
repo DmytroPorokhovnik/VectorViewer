@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31624.102
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VectorViewer", "VectorViewer\VectorViewer.csproj", "{D6B3CEC4-C5B6-4379-93A3-2EC0CDBD0177}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D6B3CEC4-C5B6-4379-93A3-2EC0CDBD0177}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D6B3CEC4-C5B6-4379-93A3-2EC0CDBD0177}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D6B3CEC4-C5B6-4379-93A3-2EC0CDBD0177}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D6B3CEC4-C5B6-4379-93A3-2EC0CDBD0177}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {72C2E0F0-8BDD-4237-B8F1-12F835CE8A5C}
+	EndGlobalSection
+EndGlobal
