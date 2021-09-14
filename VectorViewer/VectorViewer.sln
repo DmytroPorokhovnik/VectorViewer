@@ -3,7 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31624.102
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VectorViewer", "VectorViewer\VectorViewer.csproj", "{D6B3CEC4-C5B6-4379-93A3-2EC0CDBD0177}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VectorViewer", "VectorViewer\VectorViewer.csproj", "{D6B3CEC4-C5B6-4379-93A3-2EC0CDBD0177}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{9989CB28-5DF7-453D-B8EF-98C4F7EEC19B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VecrorViewerTests", "VecrotViewerTests\VecrorViewerTests.csproj", "{CDE8859F-9CD6-4D06-96F3-E9137BB16F18}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,9 +19,16 @@ Global
 		{D6B3CEC4-C5B6-4379-93A3-2EC0CDBD0177}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D6B3CEC4-C5B6-4379-93A3-2EC0CDBD0177}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D6B3CEC4-C5B6-4379-93A3-2EC0CDBD0177}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CDE8859F-9CD6-4D06-96F3-E9137BB16F18}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CDE8859F-9CD6-4D06-96F3-E9137BB16F18}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CDE8859F-9CD6-4D06-96F3-E9137BB16F18}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CDE8859F-9CD6-4D06-96F3-E9137BB16F18}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{CDE8859F-9CD6-4D06-96F3-E9137BB16F18} = {9989CB28-5DF7-453D-B8EF-98C4F7EEC19B}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {72C2E0F0-8BDD-4237-B8F1-12F835CE8A5C}
