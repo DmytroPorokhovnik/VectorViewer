@@ -1,6 +1,7 @@
 ﻿using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -39,6 +40,7 @@ namespace VectorViewer.Commands
 
             _shapeReader = new ShapeReader(openFileDialog.FileName);
             _viewModel.Shapes = await _shapeReader.GetShapesFromFile(openFileDialog.FileName);
+            _viewModel.SelectedFileName = Path.GetFileName(openFileDialog.FileName);
         }
 
         protected override bool CanExecute()

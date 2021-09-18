@@ -12,5 +12,6 @@ namespace VectorViewer.Misc
         public const string JsonExtension = ".json";
         public const string CoordinateDelimeter = ";";
         public const string ColorStringDelimeter = ";";
+        public const int DefaultShapeThickness = 2;
     }
 }

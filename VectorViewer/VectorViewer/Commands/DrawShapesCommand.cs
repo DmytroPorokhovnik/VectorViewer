@@ -24,6 +24,10 @@ namespace VectorViewer.Commands
         protected override async Task AsyncAction(Canvas canvas)
         {
             canvas.Children.Clear();
+            foreach(var shape in _viewModel.Shapes)
+            {
+                shape.Draw(canvas);
+            }
         }
 
         protected override bool CanExecute(Canvas canvas)

@@ -45,9 +45,9 @@ namespace VectorViewer.ShapeReaders
             var type = jObject.Value<string>(TypeMarker);
             IShape result = type switch
             {
-                CircleTypeMarker => jObject.ToObject<Circle>(),
-                LineTypeMarker => jObject.ToObject<Line>(),
-                TriangleTypeMarker => jObject.ToObject<Triangle>(),
+                CircleTypeMarker => new Circle(jObject.ToObject<CircleModel>()),
+                LineTypeMarker => new Line(jObject.ToObject<LineModel>()),
+                TriangleTypeMarker => new Triangle(jObject.ToObject<TriangleModel>()),
                 _ => throw new InvalidShapeTypeException(),
             };
             return result;

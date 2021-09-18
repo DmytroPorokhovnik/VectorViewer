@@ -1,9 +1,11 @@
 ﻿<Application x:Class="VectorViewer.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:local="clr-namespace:VectorViewer"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"            
              StartupUri="Views/MainWindow.xaml">
     <Application.Resources>
-         
+        <ResourceDictionary
+             xmlns:local="clr-namespace:VectorViewer" xmlns:converters="clr-namespace:VectorViewer.Converters">
+            <converters:MultiplyConverter x:Key="MultiplyConverter"/>
+        </ResourceDictionary>
     </Application.Resources>
 </Application>

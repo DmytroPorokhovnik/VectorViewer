@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Text;
-using VectorViewer.Models;
+﻿using System.Windows;
+using System.Windows.Media;
 
 namespace VectorViewer.Parsers
 {
@@ -16,7 +13,7 @@ namespace VectorViewer.Parsers
         /// </summary>
         /// <param name="coordinates">coordinates string</param>
         /// <returns>cartesian coordinate</returns>
-        CartesianPoint ParsePointCoordinate(string coordinate);
+        Point ParsePointCoordinate(string coordinate);
 
         /// <summary>
         /// Parses color string to Color object

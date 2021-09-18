@@ -1,8 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Newtonsoft.Json;
+﻿using System.Windows.Media;
+using Path = System.Windows.Shapes.Path;
+using System.Windows.Controls;
+using VectorViewer.Parsers;
 using VectorViewer.Shapes.Interfaces;
+using System.Windows;
+using VectorViewer.Misc;
 
 namespace VectorViewer.Shapes
 {
@@ -11,21 +13,48 @@ namespace VectorViewer.Shapes
     /// </summary>
     public class Circle : IShape
     {
-        [JsonProperty("center")]
-        public string Center { get; set; }
+        private readonly IShapePropertiesParser _shapePropertiesParser;
 
-        [JsonProperty("radius")]
-        public string Radius { get; set; }
+        public Point Center { get; }
+        public double Radius { get; }
+        public bool IsFilled { get; }
+        public Color Color { get; }
 
-        [JsonProperty("filled")]
-        public bool IsFilled { get; set; }
-
-        [JsonProperty("color")]
-        public string Color { get; set; }
-
-        public void Draw()
+        public Circle(CircleModel circleModel)
         {
-            throw new NotImplementedException();
+            _shapePropertiesParser = new ShapePropertiesParser();
+            Center = _shapePropertiesParser.ParsePointCoordinate(circleModel.Center);
+            Radius = _shapePropertiesParser.ParseNumber(circleModel.Radius);
+            Color = _shapePropertiesParser.ParseArgbColor(circleModel.Color);
+            IsFilled = circleModel.IsFilled;
+        }
+
+        public void Draw(Canvas canvas)
+        {
+            var circle = new Path()
+            {
+                Stroke = new SolidColorBrush(Color),
+                StrokeThickness = Constants.DefaultShapeThickness
+            };
+
+            if (IsFilled)
+            {
+                circle.Fill = new SolidColorBrush(Color);
+            }
+
+            circle.Data = new EllipseGeometry()
+            {
+                Center = new System.Windows.Point(Center.X, Center.Y),
+                RadiusX = Radius,
+                RadiusY = Radius,
+            };
+
+            canvas.Children.Add(circle);
+        }
+
+        public void Scale(Canvas canvas)
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

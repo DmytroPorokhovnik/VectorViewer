@@ -4,9 +4,12 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:VectorViewer"
-        xmlns:viewModels="clr-namespace:VectorViewer.ViewModels"
+        xmlns:viewModels="clr-namespace:VectorViewer.ViewModels" xmlns:converters="clr-namespace:VectorViewer.Converters"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800"
+        Title="MainWindow"
+        ResizeMode="NoResize"
+        Height="{Binding Source={x:Static SystemParameters.PrimaryScreenHeight}, Converter={StaticResource MultiplyConverter}, ConverterParameter='0.6'}" 
+        Width="{Binding Source={x:Static SystemParameters.PrimaryScreenWidth}, Converter={StaticResource MultiplyConverter}, ConverterParameter='0.5'}"
         d:DataContext="{d:DesignInstance viewModels:MainWindowViewModel, IsDesignTimeCreatable=False}">
     <Window.Resources>
         <Style
@@ -17,25 +20,27 @@
             <Setter Property="HorizontalAlignment" Value="Center"/>
             <Setter Property="VerticalAlignment" Value="Center"/>
         </Style>
-        
+
         <Style
             x:Key="SelectFileButton"
             TargetType="{x:Type Button}"
             BasedOn="{StaticResource BaseButton}">
-            <Setter Property="Margin" Value="5"/>            
+            <Setter Property="Margin" Value="5"/>
         </Style>
+        <converters:MultiplyConverter x:Key="MultiplyConverter"/>       
     </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="75"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        
-        <WrapPanel Grid.Row="0"
+
+        <StackPanel Grid.Row="0">
+            <WrapPanel 
             HorizontalAlignment="Center" 
             VerticalAlignment="Center">
 
-            <Button x:Name="SelectFileButton"
+                <Button x:Name="SelectFileButton"
                 Style="{StaticResource SelectFileButton}"
                 Width="Auto"
                 Height="Auto"
@@ -43,16 +48,39 @@
                 Content="Select a file"
                 Command="{Binding SelectFileCommand}"/>
 
-            <Button x:Name="DrawShapes"
+                <Button x:Name="DrawShapes"
                 Style="{StaticResource BaseButton}"
                 Width="Auto"
                 Height="Auto"
                 Padding="5"
                 Content="Draw shapes"
-                Command="{Binding DrawShapes}"/>            
-        </WrapPanel>
+                Command="{Binding DrawShapes}"
+                CommandParameter="{Binding ElementName=innerCanvas}"/>
+            </WrapPanel>
+            <Label Content="{Binding SelectedFileName}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        </StackPanel>
 
-        <Canvas x:Name="MainCanvas"
-                Grid.Row="1"/>
+        <Canvas x:Name="OuterCanvas" 
+                Grid.Row="1"
+                Loaded="OuterCanvas_Loaded">
+            <Canvas x:Name="innerCanvas">
+                <Canvas.RenderTransform>
+                    <TransformGroup>
+                        <TranslateTransform x:Name="translate">
+                            <TranslateTransform.X>
+                                <Binding ElementName="OuterCanvas" Path="ActualWidth"
+                                Converter="{StaticResource MultiplyConverter}" ConverterParameter="0.5" />
+                            </TranslateTransform.X>
+                            <TranslateTransform.Y>
+                                <Binding ElementName="OuterCanvas" Path="ActualHeight"
+                                Converter="{StaticResource MultiplyConverter}" ConverterParameter="0.5" />
+                            </TranslateTransform.Y>
+                        </TranslateTransform>
+                        <ScaleTransform ScaleX="1" ScaleY="-1" CenterX="{Binding ElementName=translate,Path=X}"
+                        CenterY="{Binding ElementName=translate,Path=Y}" />
+                    </TransformGroup>
+                </Canvas.RenderTransform>
+            </Canvas>
+        </Canvas>
     </Grid>
 </Window>

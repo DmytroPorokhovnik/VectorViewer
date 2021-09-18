@@ -1,6 +1,13 @@
-﻿using Newtonsoft.Json;
-using System;
+﻿using System;
+using System.Windows.Media;
+using Polygon = System.Windows.Shapes.Polygon;
+using System.Windows.Controls;
+using Newtonsoft.Json;
+using VectorViewer.Parsers;
 using VectorViewer.Shapes.Interfaces;
+using System.Collections.Generic;
+using System.Windows;
+using VectorViewer.Misc;
 
 namespace VectorViewer.Shapes
 {
@@ -9,23 +16,40 @@ namespace VectorViewer.Shapes
     /// </summary>
     public class Triangle : IPolygon
     {
-        [JsonProperty("a")]
-        public string PointA { get; set; }
+        private IShapePropertiesParser _shapePropertiesParser;       
 
-        [JsonProperty("b")]
-        public string PointB { get; set; }
-
-        [JsonProperty("c")]
-        public string PointC { get; set; }
-
-        [JsonProperty("filled")]
+        public Color Color { get; }
+        public Point PointA { get; }
+        public Point PointB { get; }
+        public Point PointC { get; }        
         public bool IsFilled { get; set; }
 
-        [JsonProperty("color")]
-        public string Color { get; set; }
+        public Triangle (TriangleModel triangleModel)
+        {
+            _shapePropertiesParser = new ShapePropertiesParser();
+            PointA = _shapePropertiesParser.ParsePointCoordinate(triangleModel.PointA);
+            PointB = _shapePropertiesParser.ParsePointCoordinate(triangleModel.PointB);
+            PointC = _shapePropertiesParser.ParsePointCoordinate(triangleModel.PointC);
+            Color = _shapePropertiesParser.ParseArgbColor(triangleModel.Color);
+            IsFilled = triangleModel.IsFilled;
+        }
 
 
-        public void Draw()
+        public void Draw(Canvas canvas)
+        {        
+            var points = new List<Point>() { PointA, PointB, PointC };
+
+            var triangle = new Polygon()
+            {
+                Stroke = new SolidColorBrush(Color),
+                Points = new PointCollection(points),
+                StrokeThickness = Constants.DefaultShapeThickness
+            };
+
+            canvas.Children.Add(triangle);
+        }
+
+        public void Scale(Canvas canvas)
         {
             throw new NotImplementedException();
         }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Windows.Controls;
 
 namespace VectorViewer.Shapes.Interfaces   
 {
@@ -9,6 +10,8 @@ namespace VectorViewer.Shapes.Interfaces
     /// </summary>
     public interface IShape
     {
-        void Draw();
+        void Draw(Canvas canvas);
+
+        void Scale(Canvas canvas);
     }
 }

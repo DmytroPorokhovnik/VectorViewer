@@ -1,6 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
-using System.Drawing;
+using System.Windows.Media;
 using VectorViewer.Exceptions;
 using VectorViewer.Parsers;
 
@@ -67,7 +67,7 @@ namespace VecrorViewerTests
         {
             var parsedColor = _parser.ParseArgbColor(colorArgb);
 
-            Assert.IsTrue(Color.FromArgb(alpha, red, green, blue) == parsedColor, "Wrong parsed color");
+            Assert.IsTrue(Color.FromArgb((byte)alpha, (byte)red, (byte)green, (byte)blue) == parsedColor, "Wrong parsed color");
         }
 
         [DataTestMethod]

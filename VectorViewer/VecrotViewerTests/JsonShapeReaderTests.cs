@@ -29,12 +29,14 @@ namespace VecrorViewerTests
         {
             var shapes = await _shapeReader.GetShapes(Path.Combine(_workingDirectory, TestFilesRelativePath, AllShapesFileName));
             Assert.IsTrue(shapes.Count() == 3, "Wrong shapes number");
-            var circles = shapes.Where(shape => shape is Circle);
-            var lines = shapes.Where(shape => shape is Line);
-            var triangles = shapes.Where(shape => shape is Triangle);
-            Assert.IsTrue(circles.Count() > 0, "There is no circles");
-            Assert.IsTrue(lines.Count() > 0, "There is no lines");
-            Assert.IsTrue(triangles.Count() > 0, "There is no triangles");
+            var circles = shapes.Where(shape => shape is Circle).ToList();
+            var lines = shapes.Where(shape => shape is Line).ToList();
+            var triangles = shapes.Where(shape => shape is Triangle).ToList();
+            Assert.IsTrue(circles.Count > 0, "There is no circles");
+            Assert.IsTrue(lines.Count > 0, "There is no lines");
+            Assert.IsTrue(triangles.Count > 0, "There is no triangles");
+            Assert.IsTrue(lines.Count > 0, "There is no lines");
+            Assert.IsTrue(triangles.Count > 0, "There is no triangles");
         }
 
         [TestMethod]
