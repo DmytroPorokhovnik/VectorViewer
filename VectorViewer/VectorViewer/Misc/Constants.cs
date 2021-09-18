@@ -10,5 +10,7 @@ namespace VectorViewer.Misc
     public  static class Constants
     {
         public const string JsonExtension = ".json";
+        public const string CoordinateDelimeter = ";";
+        public const string ColorStringDelimeter = ";";
     }
 }
