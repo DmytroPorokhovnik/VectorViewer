@@ -23,9 +23,11 @@ namespace VectorViewer.Commands
 
         protected override async Task AsyncAction(Canvas canvas)
         {
+            if (!(canvas.Parent is Canvas parentCanvas)) return;
             canvas.Children.Clear();
             foreach(var shape in _viewModel.Shapes)
             {
+                shape.Scale(parentCanvas);
                 shape.Draw(canvas);
             }
         }

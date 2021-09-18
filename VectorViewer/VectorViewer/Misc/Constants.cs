@@ -13,5 +13,6 @@ namespace VectorViewer.Misc
         public const string CoordinateDelimeter = ";";
         public const string ColorStringDelimeter = ";";
         public const int DefaultShapeThickness = 2;
+        public const double ScaleStep = 0.05;
     }
 }

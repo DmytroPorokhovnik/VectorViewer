@@ -1,10 +1,12 @@
 ﻿using System.Windows.Media;
 using Path = System.Windows.Shapes.Path;
+using Point = System.Windows.Point;
 using System.Windows.Controls;
 using VectorViewer.Parsers;
 using VectorViewer.Shapes.Interfaces;
-using System.Windows;
 using VectorViewer.Misc;
+using VectorViewer.Geometry;
+using System;
 
 namespace VectorViewer.Shapes
 {
@@ -16,7 +18,7 @@ namespace VectorViewer.Shapes
         private readonly IShapePropertiesParser _shapePropertiesParser;
 
         public Point Center { get; }
-        public double Radius { get; }
+        public double Radius { get; private set; }
         public bool IsFilled { get; }
         public Color Color { get; }
 
@@ -27,6 +29,12 @@ namespace VectorViewer.Shapes
             Radius = _shapePropertiesParser.ParseNumber(circleModel.Radius);
             Color = _shapePropertiesParser.ParseArgbColor(circleModel.Color);
             IsFilled = circleModel.IsFilled;
+        }
+
+        private Circle(Point center, double radius)
+        {
+            Center = center;
+            Radius = radius;
         }
 
         public void Draw(Canvas canvas)
@@ -54,7 +62,25 @@ namespace VectorViewer.Shapes
 
         public void Scale(Canvas canvas)
         {
-            throw new System.NotImplementedException();
+            if (GeometryCalculations.IsCircleInsideBoundedCartesianSystem(this, canvas.ActualWidth, canvas.ActualHeight))
+                return;
+            var scaledCircle = GetScaledCircle(canvas);
+            if (scaledCircle == null) throw new InvalidOperationException("Couldn't scale circle");
+            Radius = scaledCircle.Radius;
+        }
+
+        private Circle GetScaledCircle(Canvas canvas)
+        {   
+            Circle scaledCircle = null;
+
+            for (var i = 1 - Constants.ScaleStep; i > 0; i -= 0.05)
+            {                       
+                scaledCircle = new Circle(Center, Radius * i);
+                if (!GeometryCalculations.IsCircleInsideBoundedCartesianSystem(scaledCircle, canvas.ActualWidth, canvas.ActualHeight)) continue;
+                break;
+            }
+
+            return scaledCircle;
         }
     }
 }
