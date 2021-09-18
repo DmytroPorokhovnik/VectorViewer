@@ -6,14 +6,14 @@ using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
 using VectorViewer.Exceptions;
+using VectorViewer.Misc;
 using VectorViewer.Shapes;
 using VectorViewer.Shapes.Interfaces;
 
 namespace VectorViewer.ShapeReaders
 {
-    public class JsonShapeReader : IShapeReader
-    {
-        private const string JsonExtension = ".json";
+    public class JsonShapeReader : IShapeFileReader
+    {      
         private const string TypeMarker = "type";
         private const string CircleTypeMarker = "circle";
         private const string TriangleTypeMarker = "triangle";
@@ -59,7 +59,7 @@ namespace VectorViewer.ShapeReaders
             {
                 var fileInfo = new FileInfo(filePath);
                 if (!fileInfo.Exists) return false;
-                if (fileInfo.Extension != JsonExtension) return false;
+                if (fileInfo.Extension != Constants.JsonExtension) return false;
                 if (fileInfo.Length == 0) return false;
                 return true;
             }

@@ -7,9 +7,8 @@ namespace VectorViewer.ShapeReaders
     /// <summary>
     /// Represents a reader for shapes
     /// </summary>
-    public interface IShapeReader
+    public interface IShapeFileReader
     {
-
         Task<IEnumerable<IShape>> GetShapes(string filePath);
     }
 }

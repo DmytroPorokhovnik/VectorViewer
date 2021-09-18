@@ -22,7 +22,7 @@ namespace VecrorViewerTests
         private const string NoShapeFileName = "noShape.json";
         private const string TestFilesRelativePath = @"TestData\jsonFiles";
         private readonly string _workingDirectory = Path.GetDirectoryName(Assembly.GetEntryAssembly().Location);
-        private readonly IShapeReader _shapeReader = new JsonShapeReader();
+        private readonly IShapeFileReader _shapeReader = new JsonShapeReader();
 
         [TestMethod]
         public async Task GetShapes_ValidJson_ReturnsAllShapes()
