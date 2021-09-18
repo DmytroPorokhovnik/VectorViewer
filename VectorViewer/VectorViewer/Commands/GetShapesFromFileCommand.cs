@@ -6,18 +6,24 @@ using System.Threading.Tasks;
 using System.Windows;
 using VectorViewer.Misc;
 using VectorViewer.ShapeReaders;
+using VectorViewer.ViewModels;
 
 namespace VectorViewer.Commands
 {
+    /// <summary>
+    /// Get shapes command
+    /// </summary>
     class GetShapesFromFileCommand : AsyncCommand
     {
         private ShapeReader _shapeReader;
+        private readonly MainWindowViewModel _viewModel;
         private string[] _supportedExtensions = new string[] {Constants.JsonExtension };
         private string _filesFilter;
         private const string FilterDelimeter = "|";
 
-        public GetShapesFromFileCommand()
+        public GetShapesFromFileCommand(MainWindowViewModel viewModel)
         {
+            _viewModel = viewModel ?? throw new ArgumentNullException(nameof(viewModel));
             _filesFilter = GetStringFilter();
         }
 
@@ -32,7 +38,7 @@ namespace VectorViewer.Commands
             if(!result) return;
 
             _shapeReader = new ShapeReader(openFileDialog.FileName);
-            var shapes = await _shapeReader.GetShapesFromFile(openFileDialog.FileName);
+            _viewModel.Shapes = await _shapeReader.GetShapesFromFile(openFileDialog.FileName);
         }
 
         protected override bool CanExecute()

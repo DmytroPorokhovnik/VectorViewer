@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using VectorViewer.Models;
 using VectorViewer.Misc;
 using VectorViewer.Exceptions;
